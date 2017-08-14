@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "练习",
   "main": "main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mysucceed/webpack-test.git"
+  },
   "scripts": {
-    "test": "练习",
-    "start": "webpack" 
+    "build": "webpack"
   },
   "keywords": [
     "webpack"
@@ -13,6 +16,10 @@
   "author": "@lijianwei",
   "license": "ISC",
   "devDependencies": {
+    "css-loader": "^0.28.4",
+    "file-loader": "^0.11.2",
+    "lodash": "^4.17.4",
+    "style-loader": "^0.18.2",
     "webpack": "^3.5.3"
   }
 }
