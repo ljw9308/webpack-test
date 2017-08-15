@@ -8,6 +8,7 @@
     "url": "https://github.com/mysucceed/webpack-test.git"
   },
   "scripts": {
+    "dev": "webpack-dev-server --open --port 8081",
     "build": "webpack"
   },
   "keywords": [
@@ -16,11 +17,14 @@
   "author": "@lijianwei",
   "license": "ISC",
   "devDependencies": {
+    "clean-webpack-plugin": "^0.1.16",
     "css-loader": "^0.28.4",
     "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.30.1",
     "lodash": "^4.17.4",
     "style-loader": "^0.18.2",
     "url-loader": "^0.5.9",
-    "webpack": "^3.5.3"
+    "webpack": "^3.5.3",
+    "webpack-dev-server": "^2.7.1"
   }
 }

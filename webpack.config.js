@@ -1,5 +1,6 @@
 var webpack = require('webpack');
-
+var htmlWebpackPlugin = require('html-webpack-plugin');    //html-webpack-plugin插件
+var clearWebpackPlugin = require('clean-webpack-plugin');  //清理/assets 文件的插件
 const config = {
 	entry:  {
 		app: __dirname + '/src/main.js'
@@ -28,26 +29,39 @@ const config = {
 		            }
 		          }
 		         ]
-		  }
-		  
-		  /*,{
-	        test: /\.(png|svg|jpg|gif)$/,
+		  },
+		  {
+	        test: /\.(woff|woff2|eot|ttf|otf)$/,
 	        use: [
 	          { 
 	          	loader: 'file-loader',
 	            options: {
-	            	name: '/[name].min.[ext]',
-	            	outputPath: 'img'
+	            	name: '[name].[ext]',
+	            	outputPath: 'font/'
+	            	// publicPath: 'assets/'
 	            }
 	          }	          
 	        ]
-	      }*/
+	      }
 		]
 	},
+	devServer: {
+      // contentBase: '/assets/',
+      historyApiFallback: true,
+	  hot: true
+    },
+	plugins: [
+        // new htmlWebpackPlugin({
+        // 	title: 'htmlWebpackPlugin',
+        // 	filename: 'aa/index.html'
+        // })
+        new clearWebpackPlugin(['assets']),  //清除assets文件夹
+        new webpack.HotModuleReplacementPlugin()  //开启模块热替换
+	],
 	output: {
 		filename: 'bundle.js',
 		path: __dirname + '/assets',
-		publicPath: __dirname + '/assets/'
+		publicPath: 'assets/'
 	}
 }
 

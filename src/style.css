@@ -1,8 +1,21 @@
+@font-face{
+	font-family: 'pingfang';
+	src: url('./PingFangSC-Regular.woff2') ;
+}
+#compoent img{
+    float: right;
+}
 #compoent{
 	background: indianred;
-	background: url('./center_header.png') no-repeat left;
+	background: url('./images/center_header.png') no-repeat left;
+	height: 227px;
+	color: #FFF;
+	font-size: 25px;
+	text-align: center;
+	line-height: 200px;
+	font-family: 'pingfang';
 }
 
 #root div{
-	background: url('./dianchi.png') no-repeat left;
+	background: url('./images/dianchi.png') no-repeat center;
 }
