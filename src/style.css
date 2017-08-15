@@ -1,5 +1,6 @@
 #compoent{
 	background: indianred;
+	background: url('./center_header.png') no-repeat left;
 }
 
 #root div{
