@@ -1,8 +1,8 @@
 //main.js 
 var greeter = require('./green.js');
 import _ from 'lodash';    //lodash 是一个前端的工具库  
-import './style.css';    //引入一个css样式
-import Ico from './images/dianchi.png';
+import './../../public-resource/css/style.css';    //引入一个css样式
+import Ico from './../../public-resource/images/dianchi.png';
 
 //引入样式
 function compoent(){

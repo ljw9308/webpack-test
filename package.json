@@ -8,7 +8,7 @@
     "url": "https://github.com/mysucceed/webpack-test.git"
   },
   "scripts": {
-    "dev": "webpack-dev-server --open --port 8081",
+    "dev": "webpack-dev-server --port 8088",
     "build": "webpack"
   },
   "keywords": [

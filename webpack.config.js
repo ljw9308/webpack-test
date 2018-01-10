@@ -1,11 +1,37 @@
 var webpack = require('webpack');
 var htmlWebpackPlugin = require('html-webpack-plugin');    //html-webpack-plugin插件
 var clearWebpackPlugin = require('clean-webpack-plugin');  //清理/assets 文件的插件
+
+
+/* 多页面   */
+const pageArr = require("./app.js");
+
+
+//输出页面
+const configPlugins = [];
+pageArr.forEach((page) => {
+  const htmlPlugin = new htmlWebpackPlugin({
+    filename: `${page}/index.html`,
+    template: __dirname+`/src/${page}/html.ejs`,
+    chunks: [page, 'commons'],   //加载chunk文件（打包后的js）
+    hash: true, // 为静态资源生成hash值
+    minify: false,
+    xhtml: true,
+  });
+  configPlugins.push(htmlPlugin);
+});
+
+
+//入口
+const configEnter = {};
+pageArr.forEach((page) => {
+  let fileName = page.split("/")[1];
+  configEnter[page] = __dirname + '/src/'+page+'/'+fileName+'.js';
+});
+
+
 const config = {
-	entry:  {
-		app: __dirname + '/src/main.js'
-        /*vendors: __dirname + '/app/vendors.js'*/
-	},
+	entry: configEnter,
 	module: {
 		rules:[
 		  {
@@ -42,27 +68,27 @@ const config = {
 	            }
 	          }	          
 	        ]
-	      }
+	     }
 		]
 	},
 	devServer: {
       // contentBase: '/assets/',
       historyApiFallback: true,
-	  hot: true
+	    hot: true
     },
 	plugins: [
-        // new htmlWebpackPlugin({
-        // 	title: 'htmlWebpackPlugin',
-        // 	filename: 'aa/index.html'
-        // })
         new clearWebpackPlugin(['assets']),  //清除assets文件夹
         new webpack.HotModuleReplacementPlugin()  //开启模块热替换
 	],
 	output: {
-		filename: 'bundle.js',
-		path: __dirname + '/assets',
-		publicPath: 'assets/'
+		filename: '[name]/index[hash].js',  //
+		path: __dirname + '/assets/',  //生成文件的根目录
+		publicPath: '/assets/'     //用于css/js/图片/字体等资源的路径，相对于浏览器
 	}
 }
+
+//合成插件项
+config.plugins = configPlugins.concat(config.plugins);
+
 
 module.exports = config;
