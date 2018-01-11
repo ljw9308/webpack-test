@@ -51,7 +51,7 @@ const config = {
 		            	name: '[name].[ext]',  //name 输出的文件名规则 [path]输出文件的相对路径与当前文件的相对路径相同
 		            	//[name].[ext] 输出文件的名字和拓展名与当前相同.
 		            	outputPath: 'images/', //outputPath 输出文件的路径前缀
-		            	publicPath: 'assets/'  //打包文件中引用文件的路径前缀。
+//		            	publicPath: 'assets/'  //打包文件中引用文件的路径前缀。
 		            }
 		          }
 		         ]
@@ -78,7 +78,8 @@ const config = {
     },
 	plugins: [
         new clearWebpackPlugin(['assets']),  //清除assets文件夹
-        new webpack.HotModuleReplacementPlugin()  //开启模块热替换
+        new webpack.HotModuleReplacementPlugin(),  //开启模块热替换
+        new webpack.NamedModulesPlugin()  //输出模块热更新过得文件
 	],
 	output: {
 		filename: '[name]/index[hash].js',  //

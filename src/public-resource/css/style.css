@@ -1,13 +1,13 @@
 @font-face{
 	font-family: 'pingfang';
-	src: url('./../font/PingFangSC-Regular.woff2') ;
+	src: url('../font/PingFangSC-Regular.woff2') ;
 }
 #compoent img{
     float: right;
 }
 #compoent{
 	background: indianred;
-	background: url('./../images/center_header.png') no-repeat left;
+	background: url('../images/center_header.png') no-repeat left;
 	height: 227px;
 	color: #FFF;
 	font-size: 25px;
@@ -17,5 +17,5 @@
 }
 
 #root div{
-	background: url('./../images/dianchi.png') no-repeat center;
+	background: url('../images/dianchi.png') no-repeat center;
 }
