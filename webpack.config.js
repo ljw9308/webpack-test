@@ -14,9 +14,9 @@ pageArr.forEach((page) => {
     filename: `${page}/index.html`,
     template: __dirname+`/src/${page}/html.ejs`,
     chunks: [page, 'commons'],   //加载chunk文件（打包后的js）
-    hash: true, // 为静态资源生成hash值
+    //hash: true, // 为静态资源生成hash值
     minify: false,
-    xhtml: true,
+    xhtml: true
   });
   configPlugins.push(htmlPlugin);
 });
@@ -37,15 +37,15 @@ const config = {
 		  {
 		    test: /\.css$/,
 		    use: [
-		       'style-loader',
-		       'css-loader'
+		    	{loader:"style-loader"},
+		    	{loader:"css-loader"}
 		    ]
 		  },
 		  {
 		  	test: /\.(png|jpg|gif)$/,
 		  	use: [
 		          {
-		            loader: 'url-loader',
+		            loader: "url-loader",
 		            options:{
 		            	limit: '1024',    //limit 限制最小的图片的大小如果小于limit的话用base64显示		            	
 		            	name: '[name].[ext]',  //name 输出的文件名规则 [path]输出文件的相对路径与当前文件的相对路径相同
@@ -68,13 +68,20 @@ const config = {
 	            }
 	          }	          
 	        ]
+	     },
+	     {
+	     	  test: /\.ejs$/, 
+	        use: [
+	          {loader: 'ejs-loader'}
+	        ]
 	     }
 		]
 	},
 	devServer: {
-      // contentBase: '/assets/',
+      contentBase: '/assets/',
       historyApiFallback: true,
-	    hot: true
+	    hot: true,
+	    inline:true
     },
 	plugins: [
         new clearWebpackPlugin(['assets']),  //清除assets文件夹
@@ -82,7 +89,7 @@ const config = {
         new webpack.NamedModulesPlugin()  //输出模块热更新过得文件
 	],
 	output: {
-		filename: '[name]/index[hash].js',  //
+		filename: '[name]/index.js',  //
 		path: __dirname + '/assets/',  //生成文件的根目录
 		publicPath: '/assets/'     //用于css/js/图片/字体等资源的路径，相对于浏览器
 	}
