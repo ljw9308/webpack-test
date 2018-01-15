@@ -1,3 +1,4 @@
+/* 样式  */
 @font-face{
 	font-family: 'pingfang';
 	src: url('../font/PingFangSC-Regular.woff2') ;
@@ -16,6 +17,6 @@
 	font-family: 'pingfang';
 }
 
-#root div{
+#root>div.in{
 	background: url('../images/dianchi.png') no-repeat center;
 }
