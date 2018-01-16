@@ -14,10 +14,34 @@ const config = {
 	module: { rules },
 	devServer,
 	plugins,
-	output
+	output,
+	performance: {  //性能
+	  hints: false  //不展示警告或错误提示
+	},
+	devtool: '#eval-source-map'
 }
 
 //合成插件项
 config.plugins = configPlugins.concat(config.plugins);
 
 module.exports = config;
+
+if (process.env.NODE_ENV === 'production') {
+  module.exports.devtool = '#source-map'
+  module.exports.plugins = (module.exports.plugins || []).concat([
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      compress: {
+        warnings: false
+      }
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true
+    })
+  ])
+}
