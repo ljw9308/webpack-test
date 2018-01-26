@@ -9,7 +9,7 @@ import Ico from './../../public-resource/images/dianchi.png';
 function compoent(){      
    var div = document.createElement('div');
    div.id = 'compoent';
-   div.innerHTML = _.join(['hellow','webpack'], ' ');
+   div.innerHTML = _.join(['hellow','webpack000'], ' ');
    
    var img = new Image();
    img.classList.add('ico');         
