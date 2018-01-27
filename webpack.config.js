@@ -10,6 +10,10 @@ const configPlugins = require('./config/configOutput.js');//导入配置项插�
 const rules = require("./config/rules.js");  //规则
 //导入配置项
 
+//全局变量
+const ISDEV = process.env.NODE_ENV === 'development' ? false : true;
+const jquery = require("jquery");
+//全局变量
 
 const config = {
 	entry,
@@ -22,6 +26,12 @@ const config = {
 	},
 	plugins:[
 		new ClearWebpackPlugin(['assets']),  //清除assets文件夹
+//		new webpack.DefinePlugin({     //当webpack加载到某个js模块里，出现了未定义且名称符合（字符串完全匹配）配置中key的变量时，会自动require配置中value所指定的js模块。
+//	        $: 'jquery',
+//		    jQuery: 'jquery',
+//		    'window.jQuery': 'jquery',
+//		    'window.$': 'jquery',
+//	    }),
 		new webpack.NamedModulesPlugin(),  //输出模块热更新过得文件
 		new webpack.HotModuleReplacementPlugin(),
 	    new webpack.optimize.CommonsChunkPlugin({
@@ -36,11 +46,18 @@ const config = {
 	    }),
 	    new ExtralTextPlugin({
 	  	    filename: 'styles/[name].css?[contenthash]'
-	    })
+	    }),
+	    new webpack.DefinePlugin({     //设置全局变量
+	        ISDEV,
+	        $: jquery,
+	        jquery: jquery,
+	        "window.$": jquery,
+	        "window.jquery": jquery
+	  })
 	],
 	output:{
 		filename: '[name]/index[hash].js',  //
-		path: path.resolve(__dirname, '../assets/'),  //生成文件的根目录
+		path: path.resolve(__dirname, 'assets/'),  //生成文件的根目录
 		publicPath: '/assets/',     //用于css/js/图片/字体等资源的路径，相对于浏览器
 		hashDigestLength:16
 	},
@@ -56,13 +73,8 @@ config.plugins = [...config.plugins, ...configPlugins];
 module.exports = config;
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
+  module.exports.devtool = '#source-map';
   module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({     //自动加载模块
-      'process.env': {
-        NODE_ENV: "production"
-      }
-    }),
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
       compress: {

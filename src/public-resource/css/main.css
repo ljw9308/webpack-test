@@ -1,3 +1,5 @@
+@import url('../../public-resource/css/main.scss');
+
 /* 样式  */
 @font-face{
 	font-family: 'pingfang';
@@ -20,3 +22,4 @@
 #root>div.in{
 	background: url('../images/dianchi.png') no-repeat center;
 }
+
