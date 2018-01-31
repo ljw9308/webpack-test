@@ -9,7 +9,7 @@ pageArr.forEach((page) => {
     filename: `${page}/index.html`,
     template: path.resolve(__dirname, `../src/${page}/index.ejs`),
     chunks: [page, "vendor","manifest"],   //加载chunk文件（打包后的js）	
-	hash: true, // 为静态资源生成hash值
+	  hash: true, // 为静态资源生成hash值
     minify: false,
     xhtml: true
   });

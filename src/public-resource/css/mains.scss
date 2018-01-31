@@ -1,0 +1,8 @@
+$aa: #f2f2f2;
+$color: #666666;
+body{
+    background: $aa;
+    color: $color;   
+}
+
+@import url("./others.scss")

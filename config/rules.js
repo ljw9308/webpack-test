@@ -1,13 +1,9 @@
 const ExtralTextPlugin = require("extract-text-webpack-plugin") //提取css文件的插件
 
-const extractSass = new ExtralTextPlugin({
-    filename: "[name].[contenthash].css",
-    disable: process.env.NODE_ENV === "development"
-});
-
-const rules = [
-			  {
+const rules  = [
+			   {
 					test: /\.css$/,
+					exclude: /node_modules/,  
 					use: ExtralTextPlugin.extract({ //提取样式文件
 						fallback: "style-loader",
 						use: "css-loader"
@@ -15,18 +11,21 @@ const rules = [
 				},
 				{
 	            	test: /\.scss$/,
-		            use: extractSass.extract({
-	                use: [{
-	                    	loader: "css-loader"
-		                }, {
-		                    loader: "sass-loader"
-		                }],
+	            	exclude: /node_modules/, 
+		            use: ExtralTextPlugin.extract({
+	                	use:[{
+	                    		loader: "css-loader"
+			                }, 
+			                {
+			                    loader: "sass-loader"
+			                }],
 		                // 在开发环境使用 style-loader
 		                fallback: "style-loader"
 	            	})
         		},
 				{
 					test: /\.(png|jpg|gif)$/,
+					exclude: /node_modules/, 
 					use: [{
 						loader: "url-loader",
 						options: {
@@ -40,6 +39,7 @@ const rules = [
 				},
 				{
 					test: /\.(woff|woff2|eot|ttf|otf)$/,
+					exclude: /node_modules/, 
 					use: [{
 						loader: 'file-loader',
 						options: {
@@ -51,15 +51,10 @@ const rules = [
 				},
 				{
 					test: /\.ejs$/,
+					exclude: /node_modules/, 
 					use: [{
 						loader: 'ejs-loader'
 					}]
-				}, 
-				{
-					test: /\.(html)$/,
-					use: {
-						loader: 'html-loader'
-					}
 				},
 				{  
 					test: require.resolve('jquery'),
