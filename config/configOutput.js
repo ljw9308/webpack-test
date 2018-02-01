@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');    //html-webpack-plug
 const configPlugins = [];
 pageArr.forEach((page) => {
   const htmlPlugin = new HtmlWebpackPlugin({
+  	title: "罗僧伯格",
     filename: `${page}/index.html`,
     template: path.resolve(__dirname, `../src/${page}/index.ejs`),
     chunks: [page, "vendor","manifest"],   //加载chunk文件（打包后的js）	
