@@ -38,7 +38,7 @@ const rules  = [
 					}]
 				},
 				{
-					test: /\.(woff|woff2|eot|ttf|otf)$/,
+					test: /\.(woff|woff2|eot|ttf|otf|svg)$/,
 					exclude: /node_modules/, 
 					use: [{
 						loader: 'file-loader',
@@ -73,4 +73,6 @@ const rules  = [
  require.resolve('jquery')
         指定js模块export的变量声明为全局变量
  */
-module.exports = rules;
+module.exports = {
+	rules:rules
+};

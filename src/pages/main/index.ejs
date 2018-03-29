@@ -5,20 +5,27 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" /> 
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <link rel="stylesheet" type="text/css" href="/src/dll/styles/dll.css"/>
+    <script type="text/javascript" src="/src/dll/dll.js"></script>
   </head>
   <body>   
-     
-    <div id='root'>
+     <div class="container">
+     		<h1 class="text-center"><%= htmlWebpackPlugin.options.title %></h1>
+ 			  <div id='root'>
     	
-    </div>
+        </div>
+        <a href="../login/index.html" class="btn btn-primary btn-sm" role="button">点击跳转</a>
+    
+		    <div id="aaDom">
+		    	点击异步导入模块
+		    </div>
+		    
+		 </div>
+    
    
     
-    <a href="../login/index.html">点击跳转000</a>
     
-    <div id="aaDom">
-    	点击异步导入模块
-    </div>
-     
+
   </body>
 </html>
 
