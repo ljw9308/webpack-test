@@ -13,7 +13,7 @@ const modules = require("./config/configModule.js");  //规则
 
 //全局变量
 const ISDEV = process.env.NODE_ENV === 'development' ? false : true;
-const jquery = require("jquery");
+//const jquery = require("jquery");
 //全局变量
 
 const config = {
@@ -27,28 +27,33 @@ const config = {
 		//输出模块热更新过得文件
 		new webpack.NamedModulesPlugin(),  
 		new webpack.HotModuleReplacementPlugin(),
+		
 	    //把webpack的（初始化代码 ）和 （ 公共的模块 ） 打包进来   优点：合理利用浏览器文件缓存机制
 	    new webpack.optimize.CommonsChunkPlugin({
 	    	name:'vendor' // 注意不要.js后缀
 	       // chunks:['main','login']  默认所有的chunk或者可选的
 	    }),
+	    
 	    //从vendor文件夹中把（初始化代码 ）抽离到manifest文件
 	    new webpack.optimize.CommonsChunkPlugin({
 	        name: 'manifest',
 	        chunks: ['vendor']
 	    }),
-	    //提取样式来输入文件
+	    
+	    //提取样式来输出文件
 	    new ExtralTextPlugin({
 	  	    filename: 'styles/[name].css?[contenthash]'
 	    }),
+	    
 	    //设置全局变量----当webpack加载到某个js模块里，出现了未定义且名称符合（字符串完全匹配）配置中key的变量时，会自动require配置中value所指定的js模块。
-	    new webpack.DefinePlugin({     
-	        ISDEV,
-	        $: jquery,
-	        jquery: jquery,
-	        "window.$": jquery,
-	        "window.jquery": jquery
-	    }),
+//	    new webpack.DefinePlugin({     
+//	        ISDEV,
+//	        $: jquery,
+//	        jquery: jquery,
+//	        "window.$": jquery,
+//	        "window.jquery": jquery
+//	    }),
+	    
 	    new webpack.DllReferencePlugin({
 		  context: path.resolve(__dirname, 'assets/'), // 指定一个路径作为上下文环境，需要与DllPlugin的context参数保持一致，建议统一设置为项目根目录
 		  manifest: require('./dll.manifest.json'), // 指定manifest.json

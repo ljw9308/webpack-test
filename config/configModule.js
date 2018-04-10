@@ -1,3 +1,4 @@
+const path = require("path");
 const ExtralTextPlugin = require("extract-text-webpack-plugin") //提取css文件的插件
 
 const rules  = [
@@ -44,8 +45,7 @@ const rules  = [
 						loader: 'file-loader',
 						options: {
 							name: '[name].[ext]',
-							outputPath: 'font/'
-							// publicPath: 'assets/'
+							outputPath: 'fonts/'
 						}
 					}]
 				},

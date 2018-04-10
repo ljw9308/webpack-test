@@ -3,7 +3,7 @@
 /* 样式  */
 @font-face{
 	font-family: 'pingfang';
-	src: url('../font/PingFangSC-Regular.woff2') ;
+	src: url('../fonts/PingFangSC-Regular.woff2') ;
 }
 #compoent img{
     float: right;

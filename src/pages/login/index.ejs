@@ -5,10 +5,32 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" /> 
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <link rel="stylesheet" type="text/css" href="/src/dll/styles/dll.css"/>
+    <link rel="stylesheet" type="text/css" href="/src/dll/css/dll.css"/>
     <script type="text/javascript" src="/src/dll/dll.js"></script>
   </head>
   <body>   
-    <h1>这是一个页面的title：<b><%= htmlWebpackPlugin.options.title %></b></h1>
+  	 <!-- 导航条  -->
+  	 <%= require('./../header/index.ejs')() %>
+     <!-- 导航条  -->
+     <div class="container">
+     	  <div class="panel">
+     	  	<% for(var i = 0; i< 9; i++){ %>
+	     	  	<div class="media">
+				      <div class="media-left">
+				        <a href="#">
+				        	<img src="<%= require('../../public-resource/images/news.jpg')%>" width="150" alt="" class="media-object" />
+				        </a>
+				      </div>
+				      <div class="media-body">
+				        <h4 class="media-heading">市场监管总局：11城列为2018年传销重点整治城市</h4>
+				        	中新网4月10日电 据国家市场监督管理总局网站消息，市场监督管理总局日前发布《关于进一步加强打击传销工作的意见》，意见表示，将廊坊、北海、南宁、南京、武汉、长沙、南昌、贵阳、合肥、西安、桂林市列为2018年传销重点整治城市。
+				      </div>
+				    </div>
+     	  	<% } %>
+     	  </div> 
+     </div>	
+		 <!-- 版权信息  -->
+		 <%= require('./../footer/index.ejs')() %>
+     <!-- 版权信息   -->
   </body>
 </html>

@@ -8,32 +8,26 @@
     <link rel="stylesheet" type="text/css" href="/src/dll/css/dll.css"/>
     <script type="text/javascript" src="/src/dll/dll.js"></script>
   </head>
-  <body>
-  	
+  <body>   
   	 <!-- 导航条  -->
   	 <%= require('./../header/index.ejs')() %>
      <!-- 导航条  -->
-     
      <div class="container">
-     	
-     	  <!-- 轮播模板 -->
-     	  <%= require('./../carousel/index.js')() %>
- 			  <!-- 轮播模板 -->
- 			   
- 			  <!-- 案例模板  -->
- 			  <div id="case"></div>
-        <!-- 案例模板   -->
-		               
-		    <div id="aaDom">
-		    	点击异步导入模块
-		    </div>
-		 </div>
-		 
-     <!-- 版权信息  -->
-		  <%= require('./../footer/index.ejs')() %>
+     	  <div class="panel">
+     	  	<div class="row">
+					  <div class="col-xs-12 col-md-12">
+					    <a href="#" class="thumbnail">
+					      <img src="<%= require('../../public-resource/images/about.gif') %>" alt="">
+					    </a>
+					  </div>
+					</div>
+					<p>
+						<% for(var i = 0; i<150; i++){ %>关于我们<% } %>
+					</p>
+     	  </div> 
+     </div>	
+		 <!-- 版权信息  -->
+		 <%= require('./../footer/index.ejs')() %>
      <!-- 版权信息   -->
-  
   </body>
 </html>
-
-
