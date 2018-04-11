@@ -18,7 +18,6 @@ var data = [
 	}
 ]
 
-
 var $case = $("#case");
 	$case.html( html({title:"案例展示",data:[[...data],[...data]]}) )
 

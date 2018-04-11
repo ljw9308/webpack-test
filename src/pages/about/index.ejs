@@ -10,7 +10,7 @@
   </head>
   <body>   
   	 <!-- 导航条  -->
-  	 <%= require('./../header/index.ejs')() %>
+  	 <%= require('./../header/index.js')({current: htmlWebpackPlugin.options.filename}) %>
      <!-- 导航条  -->
      <div class="container">
      	  <div class="panel">

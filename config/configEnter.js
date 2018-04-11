@@ -5,8 +5,9 @@ const path = require("path");
 //入口
 const configEnter = {};
 pageArr.forEach((page) => {
-  let fileName = page.split("/")[1];
-  configEnter[page] = path.resolve( __dirname, `../src/${page}/${fileName}.js`);
+	let pagePath = page.path;
+  let fileName = pagePath.split("/")[1];
+  configEnter[pagePath] = path.resolve( __dirname, `../src/${pagePath}/${fileName}.js`);
 });
 
 module.exports = configEnter;
