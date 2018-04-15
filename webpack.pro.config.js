@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require("path");
+const ClearWebpackPlugin = require('clean-webpack-plugin');  //清理/assets 文件的插件
 const ExtralTextPlugin = require("extract-text-webpack-plugin");  //提取css文件的插件
 
 //导入配置项
@@ -12,7 +13,6 @@ const modules = require("./config/configModule.js");  //规则
 
 //全局变量
 const ISDEV = process.env.NODE_ENV === 'development' ? false : true;
-//const jquery = require("jquery");
 //全局变量
 
 const config = {
@@ -22,11 +22,11 @@ const config = {
 	resolve,
 	plugins:[
 	
+		//清除assets文件夹
+		//new ClearWebpackPlugin(['assets']),  
 		
-		//使用模块的相对路径作为模块的 id 
-		new webpack.NamedModulesPlugin(),
-		
-		//模块热替换
+		//输出模块热更新过得文件
+		new webpack.NamedModulesPlugin(),  
 		new webpack.HotModuleReplacementPlugin(),
 		
 	    //把webpack的（初始化代码 ）和 （ 公共的模块 ） 打包进来   优点：合理利用浏览器文件缓存机制
@@ -48,18 +48,26 @@ const config = {
 	    
 	    //设置全局变量----当webpack加载到某个js模块里，出现了未定义且名称符合（字符串完全匹配）配置中key的变量时，会自动require配置中value所指定的js模块。
 	    new webpack.DefinePlugin({     
-	        ISDEV,
-//	        $: jquery,
-//	        jquery: jquery,
-//	        "window.$": jquery,
-//	        "window.jquery": jquery
+	        ISDEV
 	    }),
 	    
 	    new webpack.DllReferencePlugin({
 		  context: path.resolve(__dirname, 'assets/'), // 指定一个路径作为上下文环境，需要与DllPlugin的context参数保持一致，建议统一设置为项目根目录
 		  manifest: require('./dll.manifest.json'), // 指定manifest.json
 		  name: 'dll',  // 当前Dll的所有内容都会存放在这个参数指定变量名的一个全局变量下，注意与DllPlugin的name参数保持一致
-		})
+		}),
+		
+		new webpack.optimize.UglifyJsPlugin({
+	      sourceMap: true,
+	      compress: {
+	        warnings: false
+	      }
+	    }),
+	    
+	    new webpack.LoaderOptionsPlugin({
+	      minimize: true
+	    })
+		
 	],
 	output:{
 		filename: '[name]/index[hash].js',  //
@@ -70,7 +78,7 @@ const config = {
 	performance: {  //性能
 	  hints: false  //不展示警告或错误提示
 	},
-	devtool: '#eval-source-map'
+	devtool: '#source-map'
 }
 
 //合成插件项

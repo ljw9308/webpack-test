@@ -5,12 +5,17 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" /> 
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <link rel="stylesheet" type="text/css" href="/src/dll/css/dll.css"/>
-    <script type="text/javascript" src="/src/dll/dll.js"></script>
+    <% if(htmlWebpackPlugin.options.ISDEV == 'development') {%>
+		    <link rel="stylesheet" type="text/css" href="/src/dll/css/dll.css"/>
+		    <script type="text/javascript" src="/src/dll/dll.js"></script>
+	  <% }else{ %>
+	  		<link rel="stylesheet" type="text/css" href="/dll/css/dll.css"/>
+		    <script type="text/javascript" src="/dll/dll.js"></script>
+	  <% } %>	
   </head>
   <body>   
   	 <!-- 导航条  -->
-  	 <%= require('./../header/index.js')({current: htmlWebpackPlugin.options.filename}) %>
+  	 <%= require('./../template/header/index.js')({current: htmlWebpackPlugin.options.filename}) %>
      <!-- 导航条  -->
      <div class="container">
      	  <div class="panel">
@@ -27,7 +32,7 @@
      	  </div> 
      </div>	
 		 <!-- 版权信息  -->
-		 <%= require('./../footer/index.ejs')() %>
+		 <%= require('./../template/footer/index.ejs')() %>
      <!-- 版权信息   -->
   </body>
 </html>

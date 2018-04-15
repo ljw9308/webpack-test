@@ -19,19 +19,19 @@ var config = {
   },
   plugins: [
   
-    new webpack.DllPlugin({
-      path: '[name].manifest.json', // 本Dll文件中各模块的索引，供DllReferencePlugin读取使用
-      name: '[name]',  // 当前Dll的所有内容都会存放在这个参数指定变量名的一个全局变量下，注意与参数output.library保持一致
-      context: path.resolve(__dirname, 'assets'),   //dirVars.staticRootDir, // 指定一个路径作为上下文环境，需要与DllReferencePlugin的context参数保持一致，建议统一设置为项目根目录
-    }),
+//  new webpack.DllPlugin({
+//    path: '[name].manifest.json', // 本Dll文件中各模块的索引，供DllReferencePlugin读取使用
+//    name: '[name]',  // 当前Dll的所有内容都会存放在这个参数指定变量名的一个全局变量下，注意与参数output.library保持一致
+//    context: path.resolve(__dirname, 'assets'),   //dirVars.staticRootDir, // 指定一个路径作为上下文环境，需要与DllReferencePlugin的context参数保持一致，建议统一设置为项目根目录
+//  }),
     
     // 跟业务代码一样，该兼容的还是得兼容 
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery',
-      'window.jQuery': 'jquery',
-      'window.$': 'jquery',
-    }),
+//  new webpack.ProvidePlugin({
+//    $: 'jquery',
+//    jQuery: 'jquery',
+//    'window.jQuery': 'jquery',
+//    'window.$': 'jquery',
+//  }),
     
     // 打包css/less的时候会用到ExtractTextPlugin
     new ExtralTextPlugin({
@@ -42,5 +42,29 @@ var config = {
   resolve // 沿用业务代码的resolve配置
 };
 
+//生产模式
+if (process.env.NODE_ENV === 'production') {
+  config.output.path = path.resolve(__dirname, 'assets/dll/');
+  config.plugins = [ 
+		new webpack.DllPlugin({
+      path: 'assets/[name].manifest.json', // 本Dll文件中各模块的索引，供DllReferencePlugin读取使用
+      name: '[name]',  // 当前Dll的所有内容都会存放在这个参数指定变量名的一个全局变量下，注意与参数output.library保持一致
+      context: path.resolve(__dirname, 'assets'),   //dirVars.staticRootDir, // 指定一个路径作为上下文环境，需要与DllReferencePlugin的context参数保持一致，建议统一设置为项目根目录
+    }),
+    ...config.plugins
+	]
+}else{
+//开发模式	
+	config.plugins = [ 
+		new webpack.DllPlugin({
+      path: '[name].manifest.json', // 本Dll文件中各模块的索引，供DllReferencePlugin读取使用
+      name: '[name]',  // 当前Dll的所有内容都会存放在这个参数指定变量名的一个全局变量下，注意与参数output.library保持一致
+      context: path.resolve(__dirname, 'assets'),   //dirVars.staticRootDir, // 指定一个路径作为上下文环境，需要与DllReferencePlugin的context参数保持一致，建议统一设置为项目根目录
+    }),
+    ...config.plugins
+	]
+}
 
 module.exports = config;
+
+

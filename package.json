@@ -9,8 +9,9 @@
   },
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --port 8088",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
-    "dell": "webpack --progress --colors --config ./webpack-dll.config.js"
+    "build": "cross-env NODE_ENV=production webpack --config webpack.pro.config.js --progress --hide-modules",
+    "dell": "cross-env NODE_ENV=development webpack --progress --colors --config ./webpack-dll.config.js",
+    "dellbuild": "cross-env NODE_ENV=production webpack --progress --colors --config ./webpack-dll.config.js"
   },
   "keywords": [
     "webpack"
@@ -18,6 +19,9 @@
   "author": "@lijianwei",
   "license": "ISC",
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-latest": "^6.24.1",
     "bootstrap-webpack": "^0.0.6",
     "clean-webpack-plugin": "^0.1.16",
     "cross-env": "^5.1.3",
