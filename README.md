@@ -150,5 +150,6 @@ var config = {
 };
 ```
 
-
+###  参考资料 [webpack 多应用架构系列](https://segmentfault.com/a/1190000006843916)
+###  学习资料 [深入浅出 Webpack](http://webpack.wuhaolin.cn/) 
 
